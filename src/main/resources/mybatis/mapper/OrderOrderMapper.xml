@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huni.mapper.OrderOrderMapper">
+
+    <resultMap id="orderResultMap" type="OrderVo">
+        <id column="id" property="id"/>
+        <result column="o_type" property="oType"/>
+        <result column="u_id" property="uId"/>
+        <result column="address" property="address"/>
+        <result column="tel" property="tel"/>
+        <result column="price" property="price"/>
+        <result column="create_time" property="createTime"/>
+        <result column="o_status" property="oStatus"/>
+        <result column="remark" property="remark"/>
+        <result column="service_time" property="serviceTime"/>
+        <result column="undertake_u_id" property="undertakeUId"/>
+        <result column="deleted" property="deleted"/>
+        <association property="user" javaType="User">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+            <result column="sex" property="sex"/>
+            <result column="email" property="email"/>
+            <result column="create_time" property="createTime"/>
+            <result column="deleted" property="deleted"/>
+        </association>
+    </resultMap>
+
+
+    <select id="findUserById" resultType="User">
+        select * from user where id=#{uId}
+    </select>
+    <select id="listUdertakeOrder" resultMap="orderResultMap" parameterType="map" >
+        SELECT A.* ,B.username from order_order as A INNER JOIN user AS  B ON A.u_id=B.id <where><if test="u_id">undertake_u_id=#{u_id}</if> and o_status=#{o_status} and A.deleted= 0</where> ;
+    </select>
+</mapper>

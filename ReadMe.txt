@@ -1,0 +1,6 @@
+1，本项目是一个基于Java语言和MySQL的web项目，因此在Java1.8和MySQL环境下才能正常运行，如果需要修改环境版本可在maven依赖管理器所提供的pom.xml中进行更改。
+2，项目所需要的数据库结构放在laji.sql文件，你可以在你的数据库系统中引入。
+3，本系统使用了SpringBoot框架，它内置了tomcat服务器，你只需要运行主程序就可以启动项目，如果需要配置tomcat的一些参数，可以在template目录下的application.yml中进行配置。
+4，项目使用MyBatis Plus作为数据库控制层框架。
+5,如果你只是想把项目运行起来，直接使用我已经打包好的jar包，在终端运行java -jar laji-0.0.1-SNAPSHOT.jar。
+6，如果出现数据库禁止访问，请确保你的数据库已经在后台运行，数据库密码是否正确，可以在可以在template目录下的application.yml中配置数据库地址和密码。

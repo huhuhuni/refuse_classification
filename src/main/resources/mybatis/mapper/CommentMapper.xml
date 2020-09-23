@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huni.mapper.CommentMapper">
+
+
+    <resultMap id="commentResultMap" type="CommentVo">
+        <id column="id" property="id"/>
+        <result column="post_id" property="postId"/>
+        <result column="user_id" property="userId"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="createTime"/>
+        <result column="deleted" property="deleted"/>
+        <association property="user" javaType="User">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+            <result column="sex" property="sex"/>
+            <result column="email" property="email"/>
+            <result column="create_time" property="createTime"/>
+            <result column="deleted" property="deleted"/>
+        </association>
+    </resultMap>
+    <select id="listCommentByPostId" resultMap="commentResultMap">
+        SELECT A.* ,B.username from comment as A INNER JOIN user AS  B ON A.user_id=B.id <where>post_id=#{id} and A.deleted= 0</where> ;
+    </select>
+</mapper>
